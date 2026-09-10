@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratoire ODF Stéphanie Modric — Thénac</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue: #2568A8;
+    --blue-deep: #123A5E;
+    --blue-pale: #EAF2FA;
+    --orange: #F2954B;
+    --orange-deep: #D97A2E;
+    --bg: #FFFFFF;
+    --bg-soft: #F5F8FC;
+    --ink: #172232;
+    --ink-soft: #5C6B7A;
+    --line: #E2E8F0;
+    --radius: 16px;
+    --shadow: 0 10px 30px -12px rgba(18,58,94,0.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+  h1,h2,h3,h4{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    margin:0;
+    color:var(--blue-deep);
+  }
+  a{color:var(--blue);}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+  img,.ph{display:block;}
+  section{padding:80px 0;}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--orange-deep);
+    background:#FDF0E4;
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  .eyebrow.blue{color:var(--blue); background:var(--blue-pale);}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 24px;
+    border-radius:999px;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    text-decoration:none;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-orange{background:var(--orange); color:#fff; box-shadow:0 8px 20px -8px rgba(242,149,75,0.7);}
+  .btn-orange:hover{background:var(--orange-deep);}
+  .btn-blue{background:var(--blue); color:#fff; box-shadow:0 8px 20px -8px rgba(37,104,168,0.6);}
+  .btn-blue:hover{background:var(--blue-deep);}
+  .btn-outline{background:#fff; color:var(--blue-deep); border-color:var(--line);}
+  .btn-outline:hover{border-color:var(--blue);}
+  .btn-block{width:100%; justify-content:center;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 28px;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:17px; color:var(--blue-deep); text-decoration:none;}
+  .logo .dot{width:11px; height:11px; border-radius:50%; background:var(--orange);}
+  nav.main-nav{display:flex; align-items:center; gap:26px;}
+  nav.main-nav a{
+    color:var(--ink-soft); text-decoration:none; font-size:14.5px; font-weight:500;
+  }
+  nav.main-nav a:hover{color:var(--blue);}
+  @media (max-width:820px){ nav.main-nav .nav-links{display:none;} }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(160deg, var(--blue-pale) 0%, #ffffff 55%);
+    padding:88px 0 0;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;
+  }
+  .hero h1{font-size:42px; line-height:1.2; max-width:540px;}
+  .hero p.lede{margin-top:20px; color:var(--ink-soft); max-width:480px; font-size:16.5px;}
+  .hero .cta-row{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .hero-art{display:flex; justify-content:center; align-items:center; padding-bottom:20px;}
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;}
+  }
+
+  /* stat bar overlapping hero bottom */
+  .stat-bar{
+    margin-top:52px;
+    background:#fff;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    transform:translateY(40px);
+  }
+  .stat-card{
+    padding:28px 20px;
+    text-align:center;
+    border-right:1px solid var(--line);
+  }
+  .stat-card:last-child{border-right:none;}
+  .stat-card .icon{color:var(--blue); margin-bottom:10px;}
+  .stat-card .num{font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:26px; color:var(--blue-deep);}
+  .stat-card .lbl{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+  @media (max-width:760px){
+    .stat-bar{grid-template-columns:1fr 1fr;}
+    .stat-card{border-bottom:1px solid var(--line);}
+  }
+  .hero-spacer{height:100px;}
+
+  /* ---------- Section head ---------- */
+  .section-head{max-width:640px; margin:0 auto 48px; text-align:center;}
+  .section-head h2{font-size:30px; line-height:1.25;}
+  .section-head p{color:var(--ink-soft); margin-top:14px;}
+
+  /* ---------- Labo (about) ---------- */
+  .about{background:var(--bg-soft);}
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;}
+  .about-visual{
+    aspect-ratio:4/3.2;
+    border-radius:var(--radius);
+    background:linear-gradient(150deg, var(--blue) 0%, var(--blue-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow);
+  }
+  .about-text p{color:var(--ink-soft); margin:0 0 16px;}
+  .about-text h2{font-size:28px; margin-bottom:18px;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Spécialités (icon cards, legacy) ---------- */
+  .icon-badge{
+    width:46px; height:46px; border-radius:13px;
+    background:var(--blue-pale); color:var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .card-link{
+    font-size:13.5px; font-weight:600; color:var(--orange-deep); text-decoration:none;
+    background:none; border:none; cursor:pointer; padding:0; font-family:inherit;
+  }
+
+  /* ---------- Spécialités — cartes photo + survol ---------- */
+  .cards-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:940px){ .cards-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .cards-grid{grid-template-columns:1fr;} }
+
+  .appliance-card{
+    position:relative;
+    height:340px;
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--line);
+    box-shadow:0 4px 14px -8px rgba(18,58,94,0.15);
+  }
+
+  .appliance-photo{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .45s cubic-bezier(.22,.9,.3,1), opacity .35s ease;
+  }
+  .appliance-photo::after{
+    content:"";
+    position:absolute; left:14%; right:14%; bottom:14%;
+    height:22px; border-radius:50%;
+    background:radial-gradient(ellipse, rgba(18,58,94,0.16) 0%, rgba(18,58,94,0) 70%);
+  }
+  .appliance-photo svg{ position:relative; z-index:1; }
+
+  .appliance-label{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:16px 18px;
+    background:linear-gradient(0deg, rgba(255,255,255,0.97) 55%, rgba(255,255,255,0));
+    transition:opacity .25s ease;
+  }
+  .appliance-label h3{font-size:16px; margin-bottom:2px;}
+  .appliance-label span{font-size:12.5px; color:var(--ink-soft);}
+
+  .appliance-overlay{
+    position:absolute; inset:0;
+    background:var(--blue-deep);
+    color:#fff;
+    padding:22px 20px 18px;
+    display:flex; flex-direction:column;
+    transform:translateY(100%);
+    opacity:0;
+    transition:transform .4s cubic-bezier(.22,.9,.3,1), opacity .3s ease;
+  }
+  .appliance-overlay h3{color:#fff; font-size:15.5px; margin-bottom:2px;}
+  .appliance-overlay .sub{font-size:11.5px; color:#9FC0DE; margin-bottom:12px;}
+  .appliance-overlay ul{list-style:none; margin:0; padding:0; flex:1; display:flex; flex-direction:column; gap:2px;}
+  .appliance-overlay li button{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    color:#E4EEF7; font-family:'Inter',sans-serif; font-size:13px;
+    padding:8px 6px; border-radius:8px;
+    display:flex; align-items:center; gap:8px;
+    transition:background .15s ease;
+  }
+  .appliance-overlay li button:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  .appliance-overlay li button .bullet{
+    width:5px; height:5px; border-radius:50%; background:var(--orange); flex-shrink:0;
+  }
+  .appliance-overlay .go{
+    margin-top:10px; font-size:12.5px; font-weight:600; color:var(--orange);
+    background:none; border:none; cursor:pointer; text-align:left; padding:6px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+  }
+
+  .appliance-card:hover .appliance-photo{transform:scale(0.9) translateY(-14px); opacity:0;}
+  .appliance-card:hover .appliance-label{opacity:0;}
+  .appliance-card:hover .appliance-overlay{transform:translateY(0); opacity:1;}
+
+  @media (hover:none){
+    .appliance-overlay{position:static; transform:none; opacity:1; background:var(--bg-soft); color:var(--ink); margin-top:-8px;}
+    .appliance-overlay h3{color:var(--blue-deep);}
+    .appliance-overlay .sub{color:var(--ink-soft);}
+    .appliance-overlay li button{color:var(--ink);}
+    .appliance-photo{position:relative; height:170px;}
+    .appliance-card{height:auto;}
+    .appliance-label{position:relative; background:none; padding:14px 16px 4px;}
+  }
+
+  /* ---------- Pourquoi nous ---------- */
+  .why{background:var(--bg-soft);}
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  @media (max-width:860px){ .why-grid{grid-template-columns:1fr;} }
+  .why-card{background:#fff; border-radius:var(--radius); padding:30px 26px; box-shadow:var(--shadow);}
+  .why-card .icon-badge{background:#FDF0E4; color:var(--orange-deep);}
+  .why-card h3{font-size:17.5px; margin-bottom:10px;}
+  .why-card p{font-size:14.5px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- Configurateur ---------- */
+  .order-note{
+    font-size:13.5px; color:var(--ink-soft);
+    background:var(--blue-pale); border:1px solid #D6E6F5;
+    padding:14px 18px; border-radius:12px; margin-bottom:36px;
+  }
+  .order-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:start;}
+  @media (max-width:900px){ .order-grid{grid-template-columns:1fr;} }
+  .panel{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:26px 26px 6px; margin-bottom:24px;}
+  .panel h4{font-size:15px; margin-bottom:16px; display:flex; align-items:center; gap:8px;}
+  .panel h4 .step{
+    width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff;
+    font-size:12px; display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+
+  .chip-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px;}
+  @media (max-width:520px){ .chip-grid{grid-template-columns:1fr;} }
+  .chip{
+    border:1.5px solid var(--line); border-radius:12px; padding:12px 14px;
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+    cursor:pointer; font-size:14px; background:#fff;
+  }
+  .chip input{accent-color:var(--blue); margin-right:8px;}
+  .chip .price{font-size:12px; color:var(--blue); font-weight:600;}
+  .chip.active{border-color:var(--blue); background:var(--blue-pale);}
+
+  .pill-group{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
+  .pill-group label{
+    border:1.5px solid var(--line); border-radius:999px; padding:9px 18px;
+    font-size:13.5px; cursor:pointer; color:var(--ink-soft);
+  }
+  .pill-group input{accent-color:var(--blue); margin-right:6px;}
+  .pill-group label.active{border-color:var(--blue); color:var(--blue-deep); background:var(--blue-pale);}
+
+  .opt-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:13px 4px; border-bottom:1px solid var(--line); font-size:14px; cursor:pointer;
+  }
+  .opt-row:last-child{border-bottom:none;}
+  .opt-row .left{display:flex; align-items:center; gap:12px;}
+  .opt-row input{accent-color:var(--orange); width:17px; height:17px;}
+  .opt-row .desc{display:block; font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  .opt-row .price{font-size:13px; color:var(--orange-deep); font-weight:700; white-space:nowrap;}
+
+  .text-fields{display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-bottom:20px;}
+  @media (max-width:520px){ .text-fields{grid-template-columns:1fr;} }
+  .text-fields .full{grid-column:1/-1;}
+  .text-fields label{display:block; font-size:12.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .text-fields input, .text-fields textarea{
+    width:100%; font-family:'Inter',sans-serif; font-size:14px; padding:11px 13px;
+    border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink);
+  }
+  .text-fields textarea{min-height:70px; resize:vertical;}
+  .text-fields input:focus, .text-fields textarea:focus{outline:none; border-color:var(--blue);}
+
+  .recap{
+    position:sticky; top:96px;
+    background:var(--blue-deep); color:#fff;
+    border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+  }
+  .recap-head{padding:22px 24px; background:rgba(255,255,255,0.06);}
+  .recap-head .eyebrow{background:rgba(242,149,75,0.18); color:#FCC48F;}
+  .recap-head h3{color:#fff; font-size:19px; margin-top:6px;}
+  .recap-body{padding:20px 24px;}
+  .recap-line{display:flex; justify-content:space-between; gap:10px; font-size:13.5px; padding:8px 0; border-bottom:1px dashed rgba(255,255,255,0.18); color:#D9E4F0;}
+  .recap-line .amount{font-weight:600; color:#fff; white-space:nowrap;}
+  .recap-empty{font-size:13px; color:#AFC2D6; padding:6px 0;}
+  .recap-total{display:flex; justify-content:space-between; align-items:baseline; padding:16px 0 2px;}
+  .recap-total .lbl{font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; color:#fff;}
+  .recap-total .val{font-family:'Plus Jakarta Sans',sans-serif; font-size:30px; font-weight:800; color:var(--orange);}
+  .recap-disclaimer{font-size:11px; color:#9FB3C8; margin-top:6px;}
+  .recap-actions{padding:6px 24px 24px; display:flex; flex-direction:column; gap:10px;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:20px;}
+  .contact-list li{display:flex; gap:14px; align-items:flex-start;}
+  .contact-list .icon-badge{margin-bottom:0; flex-shrink:0;}
+  .contact-list .t{font-size:12.5px; color:var(--ink-soft); margin-bottom:2px;}
+  .contact-list .v{font-size:15px; color:var(--ink); font-weight:500;}
+  .map-box{
+    border-radius:var(--radius); background:var(--blue-pale); border:1px solid #D6E6F5;
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
+    min-height:260px; color:var(--blue-deep); text-align:center; padding:20px;
+  }
+  .map-box .cap{font-size:13px; color:var(--ink-soft); max-width:260px;}
+
+  /* ---------- Footer ---------- */
+  /* ---------- Nos travaux ---------- */
+  .travaux{background:var(--bg-soft);}
+  .tab-row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:38px;}
+  .tab-btn{
+    border:1.5px solid var(--line); background:#fff; color:var(--ink-soft);
+    border-radius:999px; padding:9px 18px; font-size:13.5px; font-weight:600;
+    cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif; transition:all .15s ease;
+  }
+  .tab-btn.active, .tab-btn:hover{border-color:var(--blue); color:var(--blue-deep); background:var(--blue-pale);}
+
+  .work-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:940px){ .work-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .work-grid{grid-template-columns:1fr;} }
+
+  .work-item{
+    background:#fff; border-radius:14px; overflow:hidden; border:1px solid var(--line);
+    box-shadow:0 4px 14px -8px rgba(18,58,94,0.12);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .work-item:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .work-photo{
+    height:170px; display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .work-photo::after{
+    content:""; position:absolute; left:16%; right:16%; bottom:12%; height:16px; border-radius:50%;
+    background:radial-gradient(ellipse, rgba(18,58,94,0.14) 0%, rgba(18,58,94,0) 70%);
+  }
+  .work-photo svg{position:relative; z-index:1;}
+  .work-info{padding:14px 16px 18px;}
+  .work-tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.02em;
+    color:var(--orange-deep); background:#FDF0E4; padding:3px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .work-info h4{font-size:14.5px; margin-bottom:3px;}
+  .work-info p{font-size:12.5px; color:var(--ink-soft); margin:0;}
+  .work-note{
+    text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:28px;
+  }
+
+  /* ---------- Articles ---------- */
+  .articles-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:860px){ .articles-grid{grid-template-columns:1fr;} }
+  .article-card{
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#fff;
+    display:flex; flex-direction:column;
+  }
+  .article-photo{
+    height:130px; display:flex; align-items:center; justify-content:center;
+  }
+  .article-body{padding:20px 20px 22px; display:flex; flex-direction:column; flex:1;}
+  .article-meta{font-size:11.5px; color:var(--ink-soft); margin-bottom:8px;}
+  .article-card h3{font-size:16.5px; margin-bottom:8px; line-height:1.35;}
+  .article-card p{font-size:13.5px; color:var(--ink-soft); margin:0 0 16px; flex:1;}
+  .article-read{
+    font-size:13px; font-weight:600; color:var(--blue); background:none; border:none; cursor:pointer;
+    padding:0; text-align:left; font-family:'Plus Jakarta Sans',sans-serif;
+  }
+
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(9,25,41,0.55); backdrop-filter:blur(2px);
+    display:none; align-items:center; justify-content:center; padding:24px; z-index:200;
+  }
+  .modal-backdrop.open{display:flex;}
+  .modal-box{
+    background:#fff; border-radius:18px; max-width:560px; width:100%; max-height:82vh; overflow-y:auto;
+    padding:34px 34px 30px; position:relative; box-shadow:0 30px 60px -20px rgba(9,25,41,0.4);
+  }
+  .modal-close{
+    position:absolute; top:18px; right:18px; width:34px; height:34px; border-radius:50%;
+    background:var(--bg-soft); border:none; cursor:pointer; color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:center; font-size:16px;
+  }
+  .modal-close:hover{background:var(--line);}
+  .modal-box .meta{font-size:12px; color:var(--blue); font-weight:600; margin-bottom:10px;}
+  .modal-box h2{font-size:23px; margin-bottom:16px; line-height:1.3;}
+  .modal-box .body-text p{font-size:14.5px; color:var(--ink-soft); margin:0 0 14px;}
+
+  footer{background:var(--blue-deep); color:#C9D8E6; padding:56px 0 24px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,0.12);}
+  @media (max-width:760px){ .foot-grid{grid-template-columns:1fr;} }
+  .foot-grid h4{color:#fff; font-size:14px; margin-bottom:16px;}
+  .foot-grid .logo{color:#fff; margin-bottom:12px;}
+  .foot-grid p{font-size:13.5px; color:#A9BDD1; max-width:280px;}
+  .foot-links{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:13.5px;}
+  .foot-links a{color:#C9D8E6; text-decoration:none;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:22px; font-size:12.5px; color:#8FA5BC; flex-wrap:wrap; gap:8px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="logo"><span class="dot"></span>Labo ODF Modric</a>
+    <nav class="main-nav">
+      <div class="nav-links" style="display:flex; gap:26px;">
+        <a href="#labo">Le laboratoire</a>
+        <a href="#specialites">Spécialités</a>
+        <a href="#travaux">Nos travaux</a>
+        <a href="#articles">Articles</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#commande" class="btn btn-blue" style="padding:10px 20px;">Espace pro · Commander</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow blue">Laboratoire d'orthopédie dento-faciale</div>
+      <h1>Des appareils sur mesure, façonnés à la main à Thénac.</h1>
+      <p class="lede">Le laboratoire accompagne les cabinets d'orthodontie de Charente-Maritime avec des appareils fixes, amovibles et RNO pensés pour un réglage rapide en bouche.</p>
+      <div class="cta-row">
+        <a href="#commande" class="btn btn-orange">Ouvrir le configurateur</a>
+        <a href="#specialites" class="btn btn-outline">Nos spécialités</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg width="340" height="300" viewBox="0 0 340 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="170" cy="150" r="130" fill="#EAF2FA"/>
+        <path d="M80 165 C 80 95, 125 55, 170 55 C 215 55, 260 95, 260 165 C 260 215, 222 240, 170 240 C 118 240, 80 215, 80 165 Z" stroke="#2568A8" stroke-width="3"/>
+        <path d="M100 155 C 112 132, 135 120, 170 120 C 205 120, 228 132, 240 155" stroke="#F2954B" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="112" cy="175" r="7" fill="#2568A8"/>
+        <circle cx="145" cy="185" r="7" fill="#2568A8"/>
+        <circle cx="195" cy="185" r="7" fill="#2568A8"/>
+        <circle cx="228" cy="175" r="7" fill="#2568A8"/>
+        <circle cx="170" cy="60" r="6" fill="#F2954B"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stat-bar">
+      <div class="stat-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg></div>
+        <div class="num">4</div>
+        <div class="lbl">familles d'appareils</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20c4-2 7-5.5 7-10a7 7 0 0 0-14 0c0 4.5 3 8 7 10Z"/></svg></div>
+        <div class="num">90%</div>
+        <div class="lbl">façonné à la main</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div class="num">~15 min</div>
+        <div class="lbl">de réglage en bouche</div>
+      </div>
+      <div class="stat-card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/></svg></div>
+        <div class="num">17</div>
+        <div class="lbl">Charente-Maritime</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-spacer"></div>
+</section>
+
+<section class="about" id="labo">
+  <div class="wrap about-grid">
+    <div class="about-visual">
+      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.9">
+        <path d="M12 21c5-2.5 8-6.7 8-12A8 8 0 0 0 4 9c0 5.3 3 9.5 8 12Z"/>
+        <path d="M8 9c1-2 2.5-3 4-3s3 1 4 3"/>
+      </svg>
+    </div>
+    <div class="about-text">
+      <div class="eyebrow">Le laboratoire</div>
+      <h2>Un travail de prothésiste, avant d'être un service</h2>
+      <p>Le laboratoire réalise des appareils fixes, amovibles et thermoformés (PUL, SADAM, quad'hélix) pour les cabinets d'orthodontie de la région, avec pour spécialité la réhabilitation neuro-occlusale (RNO) — notamment les plaques à pistes de Planas.</p>
+      <p>La grande majorité des appareils est façonnée à la main plutôt qu'en série, avec un objectif simple : réduire le temps de réglage en bouche et améliorer le confort du patient dès la pose.</p>
+      <a href="#specialites" class="btn btn-outline">Découvrir les spécialités</a>
+    </div>
+  </div>
+</section>
+
+<section id="specialites">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow blue">Spécialités</div>
+      <h2>Quels appareils fabriquons-nous ?</h2>
+      <p>Quatre familles d'appareils, du plus spécifique au plus classique — chacune peut être configurée dans l'espace commande.</p>
+    </div>
+    <div class="cards-grid">
+
+      <div class="appliance-card" data-category="RNO — Planas">
+        <div class="appliance-photo" style="background:linear-gradient(160deg, #EAF2FA 0%, #CFE3F5 100%);">
+          <svg width="120" height="110" viewBox="0 0 120 110" fill="none">
+            <path d="M20 55c0-28 18-45 40-45s40 17 40 45-18 40-40 40-40-12-40-40Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M30 50c6-10 16-15 30-15s24 5 30 15" stroke="#F2954B" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/>
+            <circle cx="36" cy="62" r="4" fill="#2568A8"/>
+            <circle cx="52" cy="68" r="4" fill="#2568A8"/>
+            <circle cx="68" cy="68" r="4" fill="#2568A8"/>
+            <circle cx="84" cy="62" r="4" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="appliance-label"><h3>RNO — Planas</h3><span>Plaques à pistes</span></div>
+        <div class="appliance-overlay">
+          <h3>RNO — Planas</h3>
+          <div class="sub">4 variantes disponibles</div>
+          <ul>
+            <li><button data-type="RNO — Planas" data-variant="Plaque à pistes maxillaire"><span class="bullet"></span>Plaque à pistes maxillaire</button></li>
+            <li><button data-type="RNO — Planas" data-variant="Plaque à pistes mandibulaire"><span class="bullet"></span>Plaque à pistes mandibulaire</button></li>
+            <li><button data-type="RNO — Planas" data-variant="Plaque bimaxillaire"><span class="bullet"></span>Plaque bimaxillaire</button></li>
+            <li><button data-type="RNO — Planas" data-variant="Plaque avec vérin d'expansion"><span class="bullet"></span>Avec vérin d'expansion</button></li>
+          </ul>
+          <button class="go" data-type="RNO — Planas">Configurer cet appareil →</button>
+        </div>
+      </div>
+
+      <div class="appliance-card" data-category="Appareil fixe">
+        <div class="appliance-photo" style="background:linear-gradient(160deg, #FDEEE0 0%, #FBD9BB 100%);">
+          <svg width="120" height="110" viewBox="0 0 120 110" fill="none">
+            <path d="M15 60c8-4 18-6 45-6s37 2 45 6" stroke="#D97A2E" stroke-width="3" stroke-linecap="round"/>
+            <rect x="25" y="52" width="12" height="10" rx="2" stroke="#2568A8" stroke-width="2.5"/>
+            <rect x="54" y="50" width="12" height="10" rx="2" stroke="#2568A8" stroke-width="2.5"/>
+            <rect x="83" y="52" width="12" height="10" rx="2" stroke="#2568A8" stroke-width="2.5"/>
+            <path d="M20 78c8 6 20 9 40 9s32-3 40-9" stroke="#2568A8" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="appliance-label"><h3>Appareils fixes</h3><span>Arcs, bagues, ancrages</span></div>
+        <div class="appliance-overlay">
+          <h3>Appareils fixes</h3>
+          <div class="sub">4 variantes disponibles</div>
+          <ul>
+            <li><button data-type="Appareil fixe" data-variant="Arc vestibulaire"><span class="bullet"></span>Arc vestibulaire</button></li>
+            <li><button data-type="Appareil fixe" data-variant="Bagues et boîtiers"><span class="bullet"></span>Bagues et boîtiers</button></li>
+            <li><button data-type="Appareil fixe" data-variant="Ancrage renforcé"><span class="bullet"></span>Ancrage renforcé</button></li>
+            <li><button data-type="Appareil fixe" data-variant="Butée occlusale"><span class="bullet"></span>Butée occlusale</button></li>
+          </ul>
+          <button class="go" data-type="Appareil fixe">Configurer cet appareil →</button>
+        </div>
+      </div>
+
+      <div class="appliance-card" data-category="Appareil amovible">
+        <div class="appliance-photo" style="background:linear-gradient(160deg, #EAF2FA 0%, #CFE3F5 100%);">
+          <svg width="120" height="110" viewBox="0 0 120 110" fill="none">
+            <path d="M25 40h70c4 0 7 3 7 7v20c0 4-3 7-7 7H25c-4 0-7-3-7-7V47c0-4 3-7 7-7Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M32 40V30" stroke="#F2954B" stroke-width="3" stroke-linecap="round"/>
+            <path d="M32 30c0-5 8-5 8 0" stroke="#F2954B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="55" cy="54" r="4" fill="#2568A8"/>
+            <circle cx="70" cy="54" r="4" fill="#2568A8"/>
+            <circle cx="85" cy="54" r="4" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="appliance-label"><h3>Appareils amovibles</h3><span>Plaques, crochets</span></div>
+        <div class="appliance-overlay">
+          <h3>Appareils amovibles</h3>
+          <div class="sub">4 variantes disponibles</div>
+          <ul>
+            <li><button data-type="Appareil amovible" data-variant="Plaque active"><span class="bullet"></span>Plaque active</button></li>
+            <li><button data-type="Appareil amovible" data-variant="Plaque passive"><span class="bullet"></span>Plaque passive</button></li>
+            <li><button data-type="Appareil amovible" data-variant="Avec crochets Adams"><span class="bullet"></span>Avec crochets Adams</button></li>
+            <li><button data-type="Appareil amovible" data-variant="Avec vérin d'expansion"><span class="bullet"></span>Avec vérin d'expansion</button></li>
+          </ul>
+          <button class="go" data-type="Appareil amovible">Configurer cet appareil →</button>
+        </div>
+      </div>
+
+      <div class="appliance-card" data-category="Thermoformé (PUL / SADAM / Quad-hélix)">
+        <div class="appliance-photo" style="background:linear-gradient(160deg, #FDEEE0 0%, #FBD9BB 100%);">
+          <svg width="120" height="110" viewBox="0 0 120 110" fill="none">
+            <path d="M20 50c0-16 18-26 40-26s40 10 40 26-14 22-40 22-40-6-40-22Z" stroke="#D97A2E" stroke-width="3"/>
+            <path d="M28 48c8-6 20-9 32-9s24 3 32 9" stroke="#2568A8" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+            <path d="M45 60l4 8M60 62v9M75 60l-4 8" stroke="#2568A8" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="appliance-label"><h3>Thermoformés</h3><span>PUL, SADAM, quad'hélix</span></div>
+        <div class="appliance-overlay">
+          <h3>Thermoformés</h3>
+          <div class="sub">4 variantes disponibles</div>
+          <ul>
+            <li><button data-type="Thermoformé (PUL / SADAM / Quad-hélix)" data-variant="PUL"><span class="bullet"></span>PUL</button></li>
+            <li><button data-type="Thermoformé (PUL / SADAM / Quad-hélix)" data-variant="SADAM"><span class="bullet"></span>SADAM</button></li>
+            <li><button data-type="Thermoformé (PUL / SADAM / Quad-hélix)" data-variant="Quad'hélix"><span class="bullet"></span>Quad'hélix</button></li>
+            <li><button data-type="Thermoformé (PUL / SADAM / Quad-hélix)" data-variant="Gouttière de contention"><span class="bullet"></span>Gouttière de contention</button></li>
+          </ul>
+          <button class="go" data-type="Thermoformé (PUL / SADAM / Quad-hélix)">Configurer cet appareil →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="travaux" id="travaux">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow blue">Nos travaux</div>
+      <h2>Un aperçu de nos réalisations</h2>
+      <p>Illustrations représentatives de nos fabrications, classées par catégorie — chaque appareil réel est unique et ajusté à l'empreinte du patient.</p>
+    </div>
+
+    <div class="tab-row" id="workTabs">
+      <button class="tab-btn active" data-filter="all">Tous</button>
+      <button class="tab-btn" data-filter="RNO">RNO — Planas</button>
+      <button class="tab-btn" data-filter="Fixe">Fixe</button>
+      <button class="tab-btn" data-filter="Amovible">Amovible</button>
+      <button class="tab-btn" data-filter="Thermo">Thermoformé</button>
+    </div>
+
+    <div class="work-grid" id="workGrid">
+
+      <div class="work-item" data-cat="RNO">
+        <div class="work-photo" style="background:linear-gradient(160deg,#EAF2FA,#CFE3F5);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M20 55c0-28 18-45 40-45s40 17 40 45-18 40-40 40-40-12-40-40Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M30 50c6-10 16-15 30-15s24 5 30 15" stroke="#F2954B" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/>
+            <circle cx="36" cy="62" r="4" fill="#2568A8"/><circle cx="52" cy="68" r="4" fill="#2568A8"/>
+            <circle cx="68" cy="68" r="4" fill="#2568A8"/><circle cx="84" cy="62" r="4" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">RNO</span><h4>Plaque à pistes — maxillaire</h4><p>Réhabilitation neuro-occlusale</p></div>
+      </div>
+
+      <div class="work-item" data-cat="RNO">
+        <div class="work-photo" style="background:linear-gradient(200deg,#EAF2FA,#CFE3F5);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M20 55c0-28 18-45 40-45s40 17 40 45-18 40-40 40-40-12-40-40Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M30 60c6 8 16 12 30 12s24-4 30-12" stroke="#F2954B" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/>
+            <circle cx="40" cy="48" r="4" fill="#2568A8"/><circle cx="60" cy="44" r="4" fill="#2568A8"/><circle cx="80" cy="48" r="4" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">RNO</span><h4>Plaque avec vérin</h4><p>Expansion progressive</p></div>
+      </div>
+
+      <div class="work-item" data-cat="Fixe">
+        <div class="work-photo" style="background:linear-gradient(160deg,#FDEEE0,#FBD9BB);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M15 60c8-4 18-6 45-6s37 2 45 6" stroke="#D97A2E" stroke-width="3" stroke-linecap="round"/>
+            <rect x="25" y="52" width="12" height="10" rx="2" stroke="#2568A8" stroke-width="2.5"/>
+            <rect x="54" y="50" width="12" height="10" rx="2" stroke="#2568A8" stroke-width="2.5"/>
+            <rect x="83" y="52" width="12" height="10" rx="2" stroke="#2568A8" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">Fixe</span><h4>Arc vestibulaire</h4><p>Bagues et boîtiers</p></div>
+      </div>
+
+      <div class="work-item" data-cat="Fixe">
+        <div class="work-photo" style="background:linear-gradient(200deg,#FDEEE0,#FBD9BB);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M20 50h80" stroke="#D97A2E" stroke-width="3" stroke-linecap="round"/>
+            <path d="M20 50c0 15 12 24 40 24s40-9 40-24" stroke="#2568A8" stroke-width="2" stroke-dasharray="1 6"/>
+            <circle cx="60" cy="50" r="5" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">Fixe</span><h4>Ancrage renforcé</h4><p>Point d'appui additionnel</p></div>
+      </div>
+
+      <div class="work-item" data-cat="Amovible">
+        <div class="work-photo" style="background:linear-gradient(160deg,#EAF2FA,#CFE3F5);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M25 40h70c4 0 7 3 7 7v20c0 4-3 7-7 7H25c-4 0-7-3-7-7V47c0-4 3-7 7-7Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M32 40V30c0-5 8-5 8 0" stroke="#F2954B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="55" cy="54" r="4" fill="#2568A8"/><circle cx="70" cy="54" r="4" fill="#2568A8"/><circle cx="85" cy="54" r="4" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">Amovible</span><h4>Plaque avec crochets Adams</h4><p>Rétention molaire</p></div>
+      </div>
+
+      <div class="work-item" data-cat="Amovible">
+        <div class="work-photo" style="background:linear-gradient(200deg,#EAF2FA,#CFE3F5);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M25 40h70c4 0 7 3 7 7v20c0 4-3 7-7 7H25c-4 0-7-3-7-7V47c0-4 3-7 7-7Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M88 40V30c0-5-8-5-8 0" stroke="#F2954B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="45" cy="54" r="4" fill="#2568A8"/><circle cx="60" cy="54" r="4" fill="#2568A8"/><circle cx="75" cy="54" r="4" fill="#2568A8"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">Amovible</span><h4>Plaque active</h4><p>Avec vérin d'expansion</p></div>
+      </div>
+
+      <div class="work-item" data-cat="Thermo">
+        <div class="work-photo" style="background:linear-gradient(160deg,#FDEEE0,#FBD9BB);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M20 50c0-16 18-26 40-26s40 10 40 26-14 22-40 22-40-6-40-22Z" stroke="#D97A2E" stroke-width="3"/>
+            <path d="M28 48c8-6 20-9 32-9s24 3 32 9" stroke="#2568A8" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">Thermo.</span><h4>PUL</h4><p>Plaque d'occlusion en résine</p></div>
+      </div>
+
+      <div class="work-item" data-cat="Thermo">
+        <div class="work-photo" style="background:linear-gradient(200deg,#FDEEE0,#FBD9BB);">
+          <svg width="100" height="90" viewBox="0 0 120 110" fill="none">
+            <path d="M20 50c0-16 18-26 40-26s40 10 40 26-14 22-40 22-40-6-40-22Z" stroke="#D97A2E" stroke-width="3"/>
+            <path d="M45 60l4 8M60 62v9M75 60l-4 8" stroke="#2568A8" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="work-info"><span class="work-tag">Thermo.</span><h4>Quad'hélix</h4><p>Expansion transversale</p></div>
+      </div>
+
+    </div>
+    <div class="work-note">Photos non contractuelles — chaque appareil est unique et façonné à la main pour le patient.</div>
+  </div>
+</section>
+
+<section class="why" id="pourquoi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pourquoi nous</div>
+      <h2>Le fait main, jusqu'au bout</h2>
+      <p>Trois principes qui guident chaque appareil qui sort du laboratoire.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20c4-2 7-5.5 7-10a7 7 0 0 0-14 0c0 4.5 3 8 7 10Z"/></svg></div>
+        <h3>Ajustement sur mesure</h3>
+        <p>Chaque appareil est réglé à partir de l'empreinte réelle du patient, pas d'un gabarit standard.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Un temps de pose réduit</h3>
+        <p>Un appareil bien préparé en amont limite le temps passé en bouche chez le patient au moment de la pose.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12a2 2 0 1 0 0-4M4 12a2 2 0 1 1 0 4M20 12a2 2 0 1 0 0-4M20 12a2 2 0 1 1 0 4"/></svg></div>
+        <h3>Proximité avec les cabinets</h3>
+        <p>Un interlocuteur unique, à l'écoute des habitudes de travail de chaque praticien de la région.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="commande">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow blue">Espace pro</div>
+      <h2>Configurateur de commande</h2>
+      <p>Réservé aux cabinets partenaires. Composez l'appareil, ajoutez les options nécessaires, et transmettez la simulation au laboratoire.</p>
+    </div>
+
+    <div class="order-note">Cet espace simule une commande à titre d'exemple. Les montants affichés sont indicatifs — le laboratoire confirme toujours le tarif exact avant fabrication.</div>
+
+    <div class="order-grid">
+      <div class="order-form">
+
+        <div class="panel">
+          <h4><span class="step">1</span>Type d'appareil</h4>
+          <div class="chip-grid" id="typeOptions">
+            <label class="chip" data-price="145">
+              <span><input type="radio" name="type" value="RNO — Planas" checked>RNO — Planas</span>
+              <span class="price">145 €</span>
+            </label>
+            <label class="chip" data-price="120">
+              <span><input type="radio" name="type" value="Appareil fixe">Appareil fixe</span>
+              <span class="price">120 €</span>
+            </label>
+            <label class="chip" data-price="95">
+              <span><input type="radio" name="type" value="Appareil amovible">Appareil amovible</span>
+              <span class="price">95 €</span>
+            </label>
+            <label class="chip" data-price="80">
+              <span><input type="radio" name="type" value="Thermoformé (PUL / SADAM / Quad-hélix)">Thermoformé</span>
+              <span class="price">80 €</span>
+            </label>
+            <label class="chip" data-price="110">
+              <span><input type="radio" name="type" value="Enveloppe linguale nocturne (ELN)">Env. linguale nocturne</span>
+              <span class="price">110 €</span>
+            </label>
+            <label class="chip" data-price="130">
+              <span><input type="radio" name="type" value="Disjoncteur (expansion palatine)">Disjoncteur</span>
+              <span class="price">130 €</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4><span class="step">2</span>Arcade</h4>
+          <div class="pill-group" id="arcadeSelect">
+            <label class="active" data-mult="1"><input type="radio" name="arcade" value="Maxillaire" checked>Maxillaire</label>
+            <label data-mult="1"><input type="radio" name="arcade" value="Mandibulaire">Mandibulaire</label>
+            <label data-mult="1.85"><input type="radio" name="arcade" value="Bimaxillaire">Bimaxillaire</label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4><span class="step">3</span>Ajouts &amp; options</h4>
+          <div id="optionList">
+            <label class="opt-row" data-price="18">
+              <span class="left"><input type="checkbox" value="Vérin d'expansion"><span>Vérin d'expansion<span class="desc">Vis d'expansion intégrée à la plaque</span></span></span>
+              <span class="price">+18 €</span>
+            </label>
+            <label class="opt-row" data-price="12">
+              <span class="left"><input type="checkbox" value="Crochets (Adams / boutons)"><span>Crochets (Adams / boutons)<span class="desc">Rétention sur les molaires ou canines</span></span></span>
+              <span class="price">+12 €</span>
+            </label>
+            <label class="opt-row" data-price="15">
+              <span class="left"><input type="checkbox" value="Ressorts additionnels"><span>Ressorts additionnels<span class="desc">Propulsion ou rappel d'une ou plusieurs dents</span></span></span>
+              <span class="price">+15 €</span>
+            </label>
+            <label class="opt-row" data-price="14">
+              <span class="left"><input type="checkbox" value="Ancrage renforcé"><span>Ancrage renforcé<span class="desc">Vis ou bandeau d'ancrage additionnel</span></span></span>
+              <span class="price">+14 €</span>
+            </label>
+            <label class="opt-row" data-price="10">
+              <span class="left"><input type="checkbox" value="Ailettes de guidage"><span>Ailettes de guidage<span class="desc">Guidage de la croissance ou de l'occlusion</span></span></span>
+              <span class="price">+10 €</span>
+            </label>
+            <label class="opt-row" data-price="8">
+              <span class="left"><input type="checkbox" value="Plots occlusaux"><span>Plots occlusaux<span class="desc">Surélévation de l'occlusion</span></span></span>
+              <span class="price">+8 €</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4><span class="step">4</span>Informations cabinet</h4>
+          <div class="text-fields">
+            <div>
+              <label for="cabinet">Cabinet / praticien</label>
+              <input type="text" id="cabinet" placeholder="Dr. ...">
+            </div>
+            <div>
+              <label for="patientRef">Référence patient</label>
+              <input type="text" id="patientRef" placeholder="Initiales ou n° de dossier">
+            </div>
+            <div class="full">
+              <label for="notes">Notes pour le prothésiste</label>
+              <textarea id="notes" placeholder="Teinte, particularités de l'empreinte, délai souhaité..."></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="recap">
+        <div class="recap-head">
+          <div class="eyebrow">Simulation</div>
+          <h3>Récapitulatif</h3>
+        </div>
+        <div class="recap-body" id="recapBody"></div>
+        <div class="recap-actions">
+          <a href="#" class="btn btn-orange btn-block" id="sendOrder">Transmettre au laboratoire</a>
+          <a href="#" class="btn btn-outline btn-block" id="printOrder" style="background:transparent; color:#fff; border-color:rgba(255,255,255,0.35);">Imprimer la simulation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="articles">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow blue">Articles</div>
+      <h2>Comprendre nos appareils</h2>
+      <p>Quelques repères pour les cabinets et les patients sur nos spécialités.</p>
+    </div>
+
+    <div class="articles-grid">
+      <div class="article-card">
+        <div class="article-photo" style="background:linear-gradient(160deg,#EAF2FA,#CFE3F5);">
+          <svg width="70" height="60" viewBox="0 0 120 110" fill="none">
+            <path d="M20 55c0-28 18-45 40-45s40 17 40 45-18 40-40 40-40-12-40-40Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M30 50c6-10 16-15 30-15s24 5 30 15" stroke="#F2954B" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"/>
+          </svg>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">Comprendre</div>
+          <h3>La RNO et les pistes de Planas, en clair</h3>
+          <p>Une approche de rééducation de l'occlusion qui s'appuie sur des plaques à pistes plutôt que sur un appareillage classique.</p>
+          <button class="article-read" data-article="a1">Lire l'article →</button>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-photo" style="background:linear-gradient(160deg,#FDEEE0,#FBD9BB);">
+          <svg width="70" height="60" viewBox="0 0 120 110" fill="none">
+            <path d="M25 40h70c4 0 7 3 7 7v20c0 4-3 7-7 7H25c-4 0-7-3-7-7V47c0-4 3-7 7-7Z" stroke="#2568A8" stroke-width="3"/>
+            <path d="M32 40V30c0-5 8-5 8 0" stroke="#F2954B" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">Technique</div>
+          <h3>À quoi sert un vérin d'expansion ?</h3>
+          <p>Ce petit mécanisme intégré à la plaque permet d'élargir progressivement l'arcade, activation après activation.</p>
+          <button class="article-read" data-article="a2">Lire l'article →</button>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-photo" style="background:linear-gradient(160deg,#EAF2FA,#CFE3F5);">
+          <svg width="70" height="60" viewBox="0 0 120 110" fill="none">
+            <path d="M20 50c0-16 18-26 40-26s40 10 40 26-14 22-40 22-40-6-40-22Z" stroke="#D97A2E" stroke-width="3"/>
+            <path d="M45 60l4 8M60 62v9M75 60l-4 8" stroke="#2568A8" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">Conseils</div>
+          <h3>Bien entretenir son appareil amovible</h3>
+          <p>Quelques réflexes simples pour préserver la plaque et éviter qu'elle ne se déforme entre deux visites.</p>
+          <button class="article-read" data-article="a3">Lire l'article →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" id="articleModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="meta" id="modalMeta"></div>
+    <h2 id="modalTitle"></h2>
+    <div class="body-text" id="modalBody"></div>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow blue">Contact</div>
+      <h2 style="font-size:28px; margin-bottom:20px;">Parlons de votre prochaine commande</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <div><div class="t">Adresse</div><div class="v">26 rue du Théâtre Romain, Les Arènes — 17460 Thénac</div></div>
+        </li>
+        <li>
+          <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+          <div><div class="t">Par message</div><div class="v">contact@labo-odf-modric.fr</div></div>
+        </li>
+        <li>
+          <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><div class="t">Disponibilité</div><div class="v">Sur rendez-vous, du lundi au vendredi</div></div>
+        </li>
+      </ul>
+    </div>
+    <div class="map-box">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700;">Thénac, Charente-Maritime</div>
+      <div class="cap">Secteur des Arènes, à quelques minutes de Saintes. Dépôt d'empreintes directement au laboratoire.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><span class="dot"></span>Labo ODF Modric</div>
+        <p>Laboratoire d'orthopédie dento-faciale à Thénac, au service des cabinets d'orthodontie de Charente-Maritime.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul class="foot-links">
+          <li><a href="#labo">Le laboratoire</a></li>
+          <li><a href="#specialites">Spécialités</a></li>
+          <li><a href="#travaux">Nos travaux</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#commande">Commander</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="foot-links">
+          <li>26 rue du Théâtre Romain</li>
+          <li>Les Arènes — 17460 Thénac</li>
+          <li>contact@labo-odf-modric.fr</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Laboratoire ODF Stéphanie Modric — Thénac</span>
+      <span>Reconstitution non officielle</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const typeOptions = document.querySelectorAll('#typeOptions .chip');
+  const arcadeLabels = document.querySelectorAll('#arcadeSelect label');
+  const optionRows = document.querySelectorAll('#optionList .opt-row');
+  const recapBody = document.getElementById('recapBody');
+  const cabinetInput = document.getElementById('cabinet');
+  const patientInput = document.getElementById('patientRef');
+  const notesInput = document.getElementById('notes');
+  const sendBtn = document.getElementById('sendOrder');
+  const printBtn = document.getElementById('printOrder');
+  const cardLinks = document.querySelectorAll('.card-link, .appliance-overlay .go');
+  const variantButtons = document.querySelectorAll('.appliance-overlay li button');
+
+  function fmt(n){ return n.toFixed(0) + ' €'; }
+
+  function currentState(){
+    const activeType = document.querySelector('#typeOptions input[name="type"]:checked').closest('.chip');
+    const activeArcade = document.querySelector('#arcadeSelect input[name="arcade"]:checked').closest('label');
+    const mult = parseFloat(activeArcade.dataset.mult);
+    const typeLabel = activeType.querySelector('input').value;
+    const typePrice = parseFloat(activeType.dataset.price);
+    const arcadeLabel = activeArcade.querySelector('input').value;
+    const chosenOptions = [];
+    optionRows.forEach(row => {
+      const cb = row.querySelector('input');
+      if(cb.checked){ chosenOptions.push({label: cb.value, price: parseFloat(row.dataset.price)}); }
+    });
+    return {typeLabel, typePrice, arcadeLabel, mult, chosenOptions};
+  }
+
+  function render(){
+    typeOptions.forEach(c => c.classList.toggle('active', c.querySelector('input').checked));
+    arcadeLabels.forEach(l => l.classList.toggle('active', l.querySelector('input').checked));
+
+    const s = currentState();
+    let html = '';
+    html += `<div class="recap-line"><span>${s.typeLabel}</span><span class="amount">${fmt(s.typePrice)}</span></div>`;
+    html += `<div class="recap-line"><span>Arcade — ${s.arcadeLabel}</span><span class="amount">${s.mult===1?'—':'×'+s.mult}</span></div>`;
+    if(s.chosenOptions.length===0){
+      html += `<div class="recap-empty">Aucune option ajoutée pour l'instant.</div>`;
+    } else {
+      s.chosenOptions.forEach(o => { html += `<div class="recap-line"><span>${o.label}</span><span class="amount">+${fmt(o.price)}</span></div>`; });
+    }
+    const optionsTotal = s.chosenOptions.reduce((a,o)=>a+o.price,0);
+    const total = Math.round((s.typePrice + optionsTotal) * s.mult);
+    html += `<div class="recap-total"><span class="lbl">Total simulé</span><span class="val">${fmt(total)}</span></div>`;
+    html += `<div class="recap-disclaimer">Montant indicatif — devis confirmé par le laboratoire avant fabrication.</div>`;
+    recapBody.innerHTML = html;
+  }
+
+  function buildSummaryText(){
+    const s = currentState();
+    const cabinet = cabinetInput.value.trim() || '(non renseigné)';
+    const patient = patientInput.value.trim() || '(non renseigné)';
+    const notes = notesInput.value.trim() || '(aucune)';
+    const optionsTotal = s.chosenOptions.reduce((a,o)=>a+o.price,0);
+    const total = Math.round((s.typePrice + optionsTotal) * s.mult);
+    let lines = [];
+    lines.push('Simulation de commande — Laboratoire ODF Stéphanie Modric');
+    lines.push('');
+    lines.push('Cabinet / praticien : ' + cabinet);
+    lines.push('Référence patient : ' + patient);
+    lines.push('');
+    lines.push('Appareil : ' + s.typeLabel);
+    lines.push('Arcade : ' + s.arcadeLabel);
+    lines.push(s.chosenOptions.length ? 'Options :' : 'Options : aucune');
+    s.chosenOptions.forEach(o => lines.push('  - ' + o.label));
+    lines.push('');
+    lines.push('Total simulé (indicatif) : ' + total + ' €');
+    lines.push('');
+    lines.push('Notes : ' + notes);
+    return lines.join('\n');
+  }
+
+  typeOptions.forEach(c => c.querySelector('input').addEventListener('change', render));
+  arcadeLabels.forEach(l => l.querySelector('input').addEventListener('change', render));
+  optionRows.forEach(r => r.querySelector('input').addEventListener('change', render));
+
+  cardLinks.forEach(btn => {
+    btn.addEventListener('click', function(){
+      const wanted = btn.dataset.type;
+      typeOptions.forEach(c => {
+        const input = c.querySelector('input');
+        if(input.value === wanted){ input.checked = true; }
+      });
+      render();
+      document.getElementById('commande').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  variantButtons.forEach(btn => {
+    btn.addEventListener('click', function(){
+      const wanted = btn.dataset.type;
+      const variant = btn.dataset.variant;
+      typeOptions.forEach(c => {
+        const input = c.querySelector('input');
+        if(input.value === wanted){ input.checked = true; }
+      });
+      const existing = notesInput.value.trim();
+      const tag = 'Variante souhaitée : ' + variant;
+      notesInput.value = existing ? existing + '\n' + tag : tag;
+      render();
+      document.getElementById('commande').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  sendBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    const body = buildSummaryText();
+    const subject = 'Simulation de commande — ' + (cabinetInput.value.trim() || 'cabinet');
+    window.location.href = 'mailto:contact@labo-odf-modric.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+  printBtn.addEventListener('click', function(e){ e.preventDefault(); window.print(); });
+
+  // Filtres "Nos travaux"
+  const tabButtons = document.querySelectorAll('#workTabs .tab-btn');
+  const workItems = document.querySelectorAll('#workGrid .work-item');
+  tabButtons.forEach(tab => {
+    tab.addEventListener('click', function(){
+      tabButtons.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      workItems.forEach(item => {
+        item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // Articles / modal
+  const articles = {
+    a1: {
+      meta: 'Comprendre',
+      title: "La RNO et les pistes de Planas, en clair",
+      body: [
+        "La réhabilitation neuro-occlusale (RNO) est une approche qui vise à corriger la posture masticatoire plutôt que de simplement déplacer les dents. Elle repose sur des plaques à pistes, conçues par le Dr Pedro Planas, qui guident la mandibule vers une position d'occlusion plus fonctionnelle.",
+        "Contrairement à un appareillage fixe classique, la plaque à pistes agit surtout par le mouvement naturel de mastication du patient : chaque piste inclinée redirige progressivement la trajectoire des dents lors de la fermeture buccale.",
+        "Cette technique est particulièrement utilisée chez les jeunes patients, pendant la période de croissance, où elle peut accompagner un développement plus harmonieux des arcades."
+      ]
+    },
+    a2: {
+      meta: 'Technique',
+      title: "À quoi sert un vérin d'expansion ?",
+      body: [
+        "Un vérin d'expansion est un petit mécanisme à vis intégré au centre d'une plaque amovible ou fixe. Il permet d'exercer une pression progressive et contrôlée sur l'arcade dentaire, dent après dent.",
+        "En pratique, le patient (ou un parent) tourne la vis à l'aide d'une clé spécifique, selon un rythme défini par le praticien — souvent une fraction de tour tous les quelques jours. Chaque activation élargit très légèrement l'appareil.",
+        "Ce dispositif est couramment utilisé pour corriger une arcade trop étroite, créer de la place avant un traitement orthodontique, ou accompagner une expansion palatine progressive."
+      ]
+    },
+    a3: {
+      meta: 'Conseils',
+      title: "Bien entretenir son appareil amovible",
+      body: [
+        "Un appareil amovible bien entretenu dure plus longtemps et reste plus confortable à porter. Le premier réflexe est de le retirer pour manger, sauf indication contraire du praticien, afin d'éviter les chocs sur la résine.",
+        "Le nettoyage se fait à l'eau tiède avec une brosse dédiée, sans dentifrice abrasif qui pourrait rayer et ternir la plaque. Il est important d'éviter l'eau chaude, qui peut déformer la résine thermoformée.",
+        "Enfin, l'appareil doit toujours être rangé dans sa boîte lorsqu'il n'est pas porté — un appareil laissé à l'air libre se déforme et se salit beaucoup plus vite."
+      ]
+    }
+  };
+
+  const modal = document.getElementById('articleModal');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.article-read').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const data = articles[btn.dataset.article];
+      if(!data) return;
+      modalMeta.textContent = data.meta;
+      modalTitle.textContent = data.title;
+      modalBody.innerHTML = data.body.map(p => '<p>' + p + '</p>').join('');
+      modal.classList.add('open');
+    });
+  });
+  function closeModal(){ modal.classList.remove('open'); }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
